@@ -5,8 +5,7 @@ from telegram.ext import CommandHandler, InlineQueryHandler, MessageHandler, Cal
 from telegram.ext import Filters
 from django_telegrambot.apps import DjangoTelegramBot
 from strichcodebot.constants import *
-from strichcodebot.commands import start, stop, help
-from strichcodebot.models import SSP
+from strichcodebot.commands import start, help
 logger = logging.getLogger('django')
 
 
@@ -15,11 +14,9 @@ def error(bot, update, error):
 
 
 def main():
-    logger.info("Loading handlers for wuerfeln")
-    dp = DjangoTelegramBot.getDispatcher('examplebot')
-    commands = [start, stop, help]
+    dp = DjangoTelegramBot.getDispatcher('StrichcodeBot')
+    commands = [start, help]
     for cmd in commands:
-        pass_args = cmd.pass_args if hasattr(cmd, 'pass_args') else False
         name = cmd.command if hasattr(cmd, 'command') else cmd.__name__
-        dp.add_handler(CommandHandler(name, cmd, pass_args=pass_args))
+        dp.add_handler(CommandHandler(name, cmd))
     dp.add_error_handler(error)

@@ -1,14 +1,16 @@
 from strichcodebot.constants import *
+commands = []
 
 
-def start(bot, update):
+def start(update, context):
     # get or create + logging
-    update.message.reply_text(MESSAGES['start'])
+    update.message.reply_text('START')
 start.short = 'Beginne die Unterhaltung'
 start.long = 'Beginne die Unterhaltung /start oder durch Drücken des Start-Buttons. Wenn ich dich in Ruhe lassen soll /stop.'
+commands.append(start)
 
 
-def help(bot, update):
+def help(update, context):
     """
     cmds = '\n'
     for cmd in commands:
@@ -20,9 +22,4 @@ def help(bot, update):
     update.message.reply_text(MESSAGES['help'], parse_mode='Markdown')
 help.short = 'Hilfe und Befehle anzeigen'
 help.long = 'Ich zeige dir wie du mit mir umgehen kannst.'
-
-
-def stop(bot, update):
-    update.message.reply_text(MESSAGES['stop'], parse_mode='Markdown')
-help.short = 'Verbiete mir in diesen Chat zu schreiben'
-help.long = 'Ich werde keine automatischen Nachrichten mehr schicken aber noch auf Befehle reagieren.'
+commands.append(help)
